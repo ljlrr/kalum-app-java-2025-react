@@ -3,9 +3,10 @@ import './App.css'
 import { useState } from 'react'
 import { AppBarMenu } from './components/layout/AppBarMenu';
 import { SideNav } from './components/layout/SideNav';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { LoginForm } from './components/auth/LoginForm';
 import Swal from 'sweetalert2';
+import { CareerList } from './components/careers/CareerList';
 
 function App() {
 
@@ -38,7 +39,10 @@ function App() {
       <SideNav open={drawerOpen} onClose={handleDrawerToggle}></SideNav>
 
       <Routes>
-        <Route path='/login' element={<LoginForm onLoginSuccess={() => window.location.href = 'www.google.com.gt'} />} />
+        <Route path='/login' element={<LoginForm onLoginSuccess={() => window.location.href = '/careers'} />} />
+        <Route path='/careers' element={<CareerList/>}/>   
+        <Route path='/' element={<Navigate to="/careers"/>} />
+           
       </Routes>
     </Router>
 
