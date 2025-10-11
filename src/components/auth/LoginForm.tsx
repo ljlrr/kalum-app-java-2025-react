@@ -11,18 +11,17 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('kalum-user');
+  const [password, setPassword] = useState('Inicio.2025');
   const [error, setError] = useState('');
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    login(email, password).then((token: any) => {
+    login(email, password).then((response: any) => {
 
-      if (token) {
-        console.log(token);
+      if (response.data.token) {
         Swal.fire({
           title: 'Login',
           text: 'Bienvenido al Sistema',
@@ -33,17 +32,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
           }
 
         });
-      }else {
+      } else {
         Swal.fire({
-        title: 'Login',
-        text: 'Usuario o contraseña incorrectos, vuelva a intentar',
-        icon: 'error'
-      }).then((confirm) => {
-        if (confirm.isConfirmed) {
-          console.log(token);
-        }
+          title: 'Login',
+          text: 'Usuario o contraseña incorrectos, vuelva a intentar',
+          icon: 'error'
+        }).then((confirm) => {
+          if (confirm.isConfirmed) {
+          }
 
-      });
+        });
       }
 
     });
