@@ -2,7 +2,9 @@ import React from 'react'
 
 import SchoolIcon from '@mui/icons-material/School'
 import PeopleIcon from '@mui/icons-material/People'
+import SecurityIcon from '@mui/icons-material/Security'
 import { Drawer, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 interface SideNavProps {
@@ -18,6 +20,9 @@ interface MenuItem {
 
 
 export const SideNav: React.FC<SideNavProps> = ({ open, onClose }) => {
+    
+    const navigate = useNavigate();
+
     const drawerWidth = 260;
     const menuItem: MenuItem[] = [
         {
@@ -28,12 +33,18 @@ export const SideNav: React.FC<SideNavProps> = ({ open, onClose }) => {
         {
             text: 'Usuarios',
             icon: <PeopleIcon />,
+            path: '/users'
+        },
+         {
+            text: 'Roles',
+            icon: <SecurityIcon />,
             path: '/usuarios'
         }
 
     ]
 
     const handleItemClick = (path: string) => {
+        navigate(path);
         onClose();
     }
 
