@@ -5,6 +5,7 @@ export interface UserListDTO {
     username: string;
     fullName: string;
     email: string;
+    identityUser: string;
     phoneNumber: string;
 }
 
@@ -27,18 +28,18 @@ export const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        loadingUsers: (state, {payload}) => {
+        loadingUsers: (state, { payload }) => {
             state.users = payload;
         },
-        addUser: (state, action: PayloadAction<UserListResponse>) => {
-            const data:any = action.payload.data;
-            const id = data.id;
-            console.log(id);
-            state.users = [...state.users];
+      addUser: (state, action: PayloadAction<UserListDTO>) => {
+            state.users.push(action.payload);
+        },
+        removeUser: (state, action: PayloadAction<string>) => {
+            state.users = state.users.filter(u => u.id !== action.payload)
         }
     }
 });
 
-export const {loadingUsers, addUser} = usersSlice.actions;
+export const {loadingUsers, addUser, removeUser} = usersSlice.actions;
 
 export default usersSlice.reducer;
