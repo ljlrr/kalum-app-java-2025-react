@@ -10,6 +10,7 @@ import { CareerList } from './components/careers/CareerList';
 import { useAuth } from './hooks/useAuth';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { UsersList } from './components/users/UsersList';
+import { DashBoard } from './components/dashboard/Dashboard';
 
 function App() {
 
@@ -54,7 +55,11 @@ function App() {
 
 
       <Routes>
-        <Route path='/login' element={<LoginForm onLoginSuccess={() => window.location.href = '/careers'} />} />
+         <Route path='/login' element={<LoginForm onLoginSuccess={() => window.location.href = '/dashboard'} />} />
+        <Route path='/dashboard' element={
+          <DashBoard/>
+        }>
+        </Route>
         <Route path='/careers' element={
         
          <ProtectedRoute>
@@ -73,7 +78,7 @@ function App() {
 
 
 
-        <Route path='/' element={<Navigate to="/careers" />} />
+          <Route path='/' element={<Navigate to="/dashboard" />} />
 
       </Routes>
     </Router>

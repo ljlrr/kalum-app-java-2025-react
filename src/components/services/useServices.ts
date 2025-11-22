@@ -23,6 +23,15 @@ export interface UserCreateDTO {
     password: string;
 }
 
+export interface UserUpdateDTO {
+    username: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    phoneNumber: string;
+    identityUser: string;
+}
+
 export interface UserCreateResponse {
     success: boolean;
     message: string;
@@ -43,5 +52,11 @@ export const userService = {
     delete: async (id: string): Promise<any> => {
         const response = await api.delete(`users/${id}`);
         return response;
+    },
+
+    update: async (id: string, user: UserUpdateDTO): Promise<any> => {
+        const response = await api.put(`users/${id}`,user);
+        return response;
     }
+
 }
